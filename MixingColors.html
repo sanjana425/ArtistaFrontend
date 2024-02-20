@@ -35,6 +35,8 @@
             justify-content: space-around;
             margin-top: 20px;
             padding: 55px;
+            position: relative;
+            /* Added */
         }
 
         .card {
@@ -46,7 +48,6 @@
             margin: 4 27px;
             /* Adjusted margin */
             background-color: #f0f0f0;
-
         }
 
         .card h3 {
@@ -56,6 +57,45 @@
 
         .card p {
             font-size: 20px;
+        }
+
+        /* Button styling */
+        .button-container {
+            position: absolute;
+            /* Added */
+            top: 0;
+            /* Added */
+            right: 0;
+            /* Added */
+            display: flex;
+            /* Added */
+            align-items: center;
+            /* Added */
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #467fd7;
+            /* Dark blue color */
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Adjustments for mobile responsiveness */
+        @media only screen and (max-width: 600px) {
+            .card-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .button-container {
+                position: relative;
+                margin-top: 20px;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -83,6 +123,11 @@
         <div class="card" style="background-color: #7a60ab;">
             <h3>Step 4</h3>
             <p>Get accuracy of 50% to move to next module!</p>
+        </div>
+
+        <!-- Button container -->
+        <div class="button-container">
+            <button class="button">>></button>
         </div>
     </div>
 
