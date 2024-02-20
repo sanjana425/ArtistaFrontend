@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Painting Canvas</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 92.2vh;
+            background-color: #ddeaf8;
+            border-left: 25px solid rgb(12, 66, 83);
+            border-right: 25px solid rgb(12, 66, 83);
+            border-top: 25px solid rgb(12, 66, 83);
+            border-bottom: 25px solid rgb(12, 66, 83);
+            /* Light blue background */
+        }
+
+        .container {
+            width: 1273px;
+            height: 90px;
+            border: 1px solid #ccc;
+            background-color: #c1d4f1;
+            position: absolute;
+            top: 24px;
+            /* Adjust top position */
+            left: 25px;
+            /* Adjust left position */
+            padding: 20px;
+        }
+
+        .container p {
+            font-size: 27px;
+            margin: 0;
+            /* Remove default margin */
+        }
+
+        #color-swatch {
+            position: absolute;
+            left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 200px;
+            background: linear-gradient(to bottom, red, orange, yellow, green, blue, indigo, violet, red);
+            border: 2px solid black;
+            border-radius: 5px;
+            z-index: 1;
+            /* Ensure it's above canvas */
+        }
+
+        #color-wheel-container {
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 150px;
+            height: 150px;
+            border: 2px solid black;
+            /* Added border style */
+            border-radius: 50%;
+            z-index: 1;
+            /* Ensure it's above canvas */
+        }
+
+        #color-wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(red 0deg,
+                    orange 40deg,
+                    yellow 80deg,
+                    lime 120deg,
+                    aqua 160deg,
+                    blue 200deg,
+                    purple 240deg,
+                    magenta 280deg,
+                    red 320deg,
+                    red 360deg);
+            border: 2px solid black;
+            /* Added border style */
+        }
+
+
+        #canvas-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: 70px;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 0;
+            /* Ensure it's below color picker */
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="color-swatch"></div>
+    <div id="color-wheel-container">
+        <canvas id="color-wheel" width="150" height="150"></canvas>
+    </div>
+
+    <div class="container">
+        <p>MIXING COLORS STAGE</p>
+        <p>Follow the steps as told and master the stage of mixing colors!</p>
+    </div>
+
+    <div id="canvas-container">
+        <canvas id="painting-canvas" width="400" height="400"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/konva@8.2.0/konva.min.js"></script>
+    <script>
+        // Color Wheel Initialization
+        var stage = new Konva.Stage({
+            container: 'color-wheel',
+            width: 150,
+            height: 150
+        });
+        var layer = new Konva.Layer();
+        var colorWheel = new Konva.Wheel({
+            x: stage.width() / 2,
+            y: stage.height() / 2,
+            radius: 60,
+            fillRadialGradientStartPoint: { x: 0, y: 0 },
+            fillRadialGradientStartRadius: 0,
+            fillRadialGradientEndPoint: { x: 0, y: 0 },
+            fillRadialGradientEndRadius: 60,
+            fillRadialGradientColorStops: [0, 'red', 0.15, 'orange', 0.3, 'yellow', 0.45, 'green', 0.6, 'blue', 0.75, 'indigo', 0.9, 'violet', 1, 'red'],
+            stroke: 'black',
+            strokeWidth: 2
+        });
+        layer.add(colorWheel);
+        stage.add(layer);
+
+        // Color Swatch
+        var colorSwatch = document.getElementById('color-swatch');
+        colorSwatch.addEventListener('click', function (event) {
+            var color = event.target.style.backgroundColor;
+            if (color) {
+                setColor(color);
+            }
+        });
+
+        // Set color on canvas
+        function setColor(color) {
+            var canvas = document.getElementById('painting-canvas');
+            var context = canvas.getContext('2d');
+            context.fillStyle = color;
+            context.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // Canvas Interaction
+        var canvas = document.getElementById('painting-canvas');
+        var context = canvas.getContext('2d');
+        var isDrawing = false;
+
+        canvas.addEventListener('mousedown', function (event) {
+            isDrawing = true;
+            draw(event);
+        });
+
+        canvas.addEventListener('mousemove', function (event) {
+            if (isDrawing) {
+                draw(event);
+            }
+        });
+
+        canvas.addEventListener('mouseup', function () {
+            isDrawing = false;
+        });
+
+        function draw(event) {
+            var x = event.clientX - canvas.getBoundingClientRect().left;
+            var y = event.clientY - canvas.getBoundingClientRect().top;
+
+            if (isDrawing) {
+                context.fillStyle = 'black';
+                context.beginPath();
+                context.arc(x, y, 5, 0, Math.PI * 2);
+                context.fill();
+            }
+        }
+    </script>
+</body>
+
+</html>
