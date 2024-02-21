@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,16 +20,19 @@
             border-top: 25px solid rgb(12, 66, 83);
             border-bottom: 25px solid rgb(12, 66, 83);
         }
+
         .container {
             text-align: center;
             display: flex;
             align-items: center;
         }
+
         .btn-container {
             display: flex;
             flex-direction: column;
             margin-left: 100px;
         }
+
         .btn {
             padding: 12px 24px;
             margin: 10px;
@@ -42,32 +46,46 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
+
         .btn:hover {
             background-color: #0056b3;
         }
+
         h1 {
-            font-size: 36px; /* Increased font size */
-            font-family: "Times New Roman", Times, serif; /* Changed font */
+            font-size: 36px;
+            /* Increased font size */
+            font-family: "Times New Roman", Times, serif;
+            /* Changed font */
             margin-bottom: 20px;
         }
+
+
+
         .blue {
-            color:#007bff; /* Define color for the first word */
+            color: #007bff;
+            /* Define color for the first word */
         }
+
         .pink {
-            color:palevioletred; /* Define color for the second word */
+            color: palevioletred;
+            /* Define color for the second word */
         }
+
         @media (max-width: 600px) {
             .container {
                 flex-direction: column;
             }
+
             .btn-container {
                 margin-left: 0;
-                margin-top: 20px;
+                margin-top: 19px;
             }
+
             .btn {
-                width: 80%;
+                width: 90%;
                 margin: 10px auto;
             }
+
             h1 {
                 font-size: 24px;
                 margin-bottom: 20px;
@@ -75,17 +93,20 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <img style="height: 92.2vh ; width: 100vh;" src="./images/bgg.jpg" alt="lobg">
         <div class="btn-container">
-        <h1><span class="blue">Login</span></h1>
-        <form action="#" method="post">
-            <input type="text" name="username" placeholder="Username" required><br><br>
-            <input type="password" name="password" placeholder="Password" required><br><br>
-            <input class="btn" type="submit" value="Login">
-        </form>
+            <h1><span class="blue">Login</span></h1>
+            <form action="#" method="post">
+                <input type="text" name="username" placeholder="Username" required><br><br>
+                <input type="password" name="password" placeholder="Password" required><br><br><br>
+                <a href="Modules.html" style="text-decoration: none; margin-top:20px; padding:11px; width:12px;"
+                    class="btn" type="submit" value="Login">Login</a>
+            </form>
+        </div>
     </div>
-</div>
 </body>
+
 </html>

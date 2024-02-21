@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,16 +20,19 @@
             border-top: 25px solid rgb(12, 66, 83);
             border-bottom: 25px solid rgb(12, 66, 83);
         }
+
         .container {
             text-align: center;
             display: flex;
             align-items: center;
         }
+
         .btn-container {
             display: flex;
             flex-direction: column;
             margin-left: 20px;
         }
+
         .btn {
             padding: 12px 24px;
             margin: 10px;
@@ -42,32 +46,44 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
+
         .btn:hover {
             background-color: #0056b3;
         }
+
         h1 {
-            font-size: 36px; /* Increased font size */
-            font-family: "Times New Roman", Times, serif; /* Changed font */
+            font-size: 36px;
+            /* Increased font size */
+            font-family: "Times New Roman", Times, serif;
+            /* Changed font */
             margin-bottom: 20px;
         }
+
         .blue {
-            color:#007bff; /* Define color for the first word */
+            color: #007bff;
+            /* Define color for the first word */
         }
+
         .pink {
-            color:palevioletred; /* Define color for the second word */
+            color: palevioletred;
+            /* Define color for the second word */
         }
+
         @media (max-width: 600px) {
             .container {
                 flex-direction: column;
             }
+
             .btn-container {
                 margin-left: 0;
                 margin-top: 20px;
             }
+
             .btn {
                 width: 80%;
                 margin: 10px auto;
             }
+
             h1 {
                 font-size: 24px;
                 margin-bottom: 20px;
@@ -75,16 +91,17 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <img style="height: 92.2vh ;" src="./images/1.jpg" alt="Homepage">
         <div class="btn-container">
             <h1><span class="blue"> WELCOME TO </span><br><span class="pink"> ARTISTA </span></h1>
-            <a href="#" class="btn">Sign Up</a>
+            <a href="signup.html" class="btn" style="text-decoration:none">Sign Up</a>
             <h4><span class="blue">OR</span><br><br><span class="pink">Already Registered ?</span></h4>
-            <a href="#" class="btn">Login</a>
+            <a href="login.html" class="btn" style="text-decoration:none">Login</a>
         </div>
     </div>
 </body>
+
 </html>
- 
