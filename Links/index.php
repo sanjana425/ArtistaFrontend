@@ -1,3 +1,14 @@
+<?php  
+ 
+session_start();
+
+	include("connection.php");
+	include("functions.php");
+
+	$user_data = check_login($con);
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,7 +85,7 @@
                     <br>
                     <h2>1. <br> LEARN PAINTING</h2>
                     <br> <br>
-                    <img src="./images/art 8.png"
+                    <img src="../images/art 8.png"
                         style=" max-width: 260px;margin-left:-40px;height:30vhpx;margin-top:25px;">
                     <!-- Content of the first card goes here -->
                 </div>
@@ -85,7 +96,7 @@
                     <br>
                     <h2>2.<br> GENERATE PAINTING</h2>
                     <br><br>
-                    <img src="./images/art 9.jpg"
+                    <img src="../images/art 9.jpg"
                         style=" max-width: 260px;margin-left:-40px;height:30vhpx;margin-top:15px;">
                     <!-- Content of the second card goes here -->
                 </div>
