@@ -41,6 +41,23 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
     <title>Sign Up</title>
     <!-- Your CSS styles -->
     <style>
+    
+            body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+            height: 92.2vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-left: 26px solid rgb(12, 66, 83);
+            border-right: 26px solid rgb(12, 66, 83);
+            border-top: 26px solid rgb(12, 66, 83);
+            border-bottom: 27px solid rgb(12, 66, 83);
+        }
+
+        
         /* Your existing CSS styles */
         .container {
             display: flex;
@@ -66,9 +83,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" style="padding-right:25vh;padding-bottom:70px;">
         <!-- Your HTML content -->
-        <img style="height: 90.2vh; width: 80vh; height:80vh" src="../images/bg1.jpg" alt="lobg">
+        <img style="height: 90.2vh; width: 80vh; height:80vh;" src="../images/bg1.jpg" alt="lobg">
         <div class="btn-container">
             <h1><span class="blue">Sign Up</span></h1>
 
