@@ -13,18 +13,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
     exit;
 }
 
-// Check if the username is stored in the session
-$username = isset($_SESSION['filled_username']) ? $_SESSION['filled_username'] : "SANJANA";
+$user_data = check_login($con);
 
-// Remove numbers from the username
-$username = preg_replace('/\d/', '', $username);
-
-// Function to display the username with a welcome message
-function displayWelcomeMessage($username) {
-    echo "<p>WELCOME $username,</p>";
-    echo "<p>START YOUR JOURNEY</p>";
-    echo "<p>What would you like to choose?</p>";
+// Fetch the username from the session variable
+if (isset($_SESSION['filled_username'])) {
+    $username = preg_replace('/\d/', '', $_SESSION['filled_username']);
+} else {
+    $username = "Guest";
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +32,7 @@ function displayWelcomeMessage($username) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artista Main Modules</title>
     <style>
-        /* Your CSS styles */body {
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -85,18 +82,19 @@ function displayWelcomeMessage($username) {
             /* Increase the max height as needed */
             object-fit: contain;
         }
-        /* Add your CSS styles here */
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="left-side" style="font-size:35px">
-            <!-- Display the welcome message with the username -->
-            <?php displayWelcomeMessage($username); ?>
+            <!-- Display the username -->
+            <p>WELCOME <?php echo $username; ?>,</p>
+            </p>START YOUR JOURNEY</p>
+            <p>What would you like to choose?</p>
         </div>
 
-         <div class="right-side" style="font-size:20px;">
+        <div class="right-side" style="font-size:20px;">
             <a href="LearnPainting.php" style="text-decoration: none; color:black">
                 <div class="card" style="background-color:white">
                     <br>

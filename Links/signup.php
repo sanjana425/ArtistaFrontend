@@ -1,31 +1,34 @@
-<?php
+<?php 
 session_start();
+
 include("connection.php");
 include("functions.php");
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    // something was posted
+if($_SERVER['REQUEST_METHOD'] == "POST") {
+    // Something was posted
     $user_name = $_POST['username'];
-    $email = $_POST['email']; // Assuming you also want to capture email
+    $user_id = $_POST['id'];
     $password = $_POST['password'];
 
-    if (!empty($user_name) && !empty($password) && !empty($email)) {
+    if(!empty($user_name) && !empty($password) && !is_numeric($user_name)) {
         // Hash the password
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        // Save to database
-        $user_id = random_num(20);
-        $query = "insert into users (user_id, username, password) values ('$user_id', '$user_name', '$hashed_password')";
-        mysqli_query($con, $query);
+        // Save to database using prepared statement
+        $stmt = mysqli_prepare($con, "INSERT INTO users (username, id, password) VALUES (?,?, ?)");
+        mysqli_stmt_bind_param($stmt, "sss", $user_name,$user_id, $hashed_password);
 
-        // Display alert
-        echo '<script>alert("You are signed up successfully!");</script>';
+        if (mysqli_stmt_execute($stmt)) {
+            echo '<script>alert("SignUp successful!Please LogIn");</script>';
+						echo '<script>window.location.href = "login.php";</script>';
+            exit;
+        } else {
+            echo "Error: " . mysqli_error($con);
+        }
 
-        // Redirect to login page
-        echo '<script>window.location.href = "login.php";</script>';
-        exit; // Terminate script execution after redirect
+        mysqli_stmt_close($stmt);
     } else {
-        echo '<script>alert("Invalid!");</script>';
+        echo "Please enter valid information!";
     }
 }
 ?>
@@ -36,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
+    <!-- Your CSS styles -->
     <style>
         /* Your existing CSS styles */
         .container {
@@ -63,11 +67,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 </head>
 <body>
     <div class="container">
+        <!-- Your HTML content -->
         <img style="height: 90.2vh; width: 80vh; height:80vh" src="../images/bg1.jpg" alt="lobg">
         <div class="btn-container">
             <h1><span class="blue">Sign Up</span></h1>
 
-            <form action="#" method="post" onsubmit="alert('You are signed up successfully! Now Log In');">
+            <form  method="post">
                 <input type="text" style="padding:10px; border-radius:7px; width:300px;" name="username" placeholder="Username" required><br><br>
                 <input type="email" style="padding:10px; border-radius:7px; width:300px;" name="email" placeholder="Email" required><br><br>
                 <input type="password" style="padding:10px; border-radius:7px; width:300px;" name="password" placeholder="Password" required><br><br>

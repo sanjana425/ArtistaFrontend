@@ -107,8 +107,8 @@
     </div>
 
     <div class="card-container">
-        <div class="card" style="margin-left:210px ;"><img style="height: 60vh ;" src="./images/3.jpg" alt="1"></div>
-        <div class="card" style="margin-right:150px"><img style="height: 60vh ;" src="./images/2.jpg" alt="2"></div>
+        <div class="card" style="margin-left:210px ;cursor:pointer;"><img style="height: 60vh ;" src="../images/3.jpg" alt="1"></div>
+        <div class="card" style="margin-right:150px;cursor:pointer;"><img style="height: 60vh ;" src="../images/2.jpg" alt="2"></div>
         <div class="button-container">
 
             <a href=""><button class="button">>></button></a>

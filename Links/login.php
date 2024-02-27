@@ -1,35 +1,49 @@
-<?php
+<?php 
+
 session_start();
-include("connection.php");
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+	include("connection.php");
+	include("functions.php");
 
-    if (!empty($username) && !empty($password)) {
-        $query = "SELECT * FROM users WHERE username = ?";
-        $stmt = mysqli_prepare($con, $query);
-        mysqli_stmt_bind_param($stmt, "s", $username);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
 
-        if ($result && mysqli_num_rows($result) > 0) {
-            $user_data = mysqli_fetch_assoc($result);
-            if (password_verify($password, $user_data['password'])) {
-                $_SESSION['user_id'] = $user_data['user_id'];
-                header("Location: index.php");
-                exit;
-            } else {
-                echo "<p style='color:red'>Wrong username or password!</p>";
-            }
-        } else {
-            echo "<p style='color:red'>Wrong username or password!</p>";
-        }
-    } else {
-        echo "<p style='color:red'>Please enter username and password!</p>";
-    }
-}
+	if($_SERVER['REQUEST_METHOD'] == "POST")
+	{
+		//something was posted
+		$user_name = $_POST['username'];
+		$password = $_POST['password'];
+
+		if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
+		{
+
+			//read from database
+			$query = "select * from users where username = '$user_name' limit 1";
+			$result = mysqli_query($con, $query);
+
+			if($result)
+			{
+				if($result && mysqli_num_rows($result) > 0)
+				{
+
+					$user_data = mysqli_fetch_assoc($result);
+					
+					if(password_verify($password, $user_data['password']))
+
+					{   echo '<script>alert("Login successful!");</script>';
+						echo '<script>window.location.href = "index.php";</script>';
+						die;
+					}
+				}
+			}
+			
+			echo "wrong username or password!";
+		}else
+		{
+			echo "wrong username or password!";
+		}
+	}
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -132,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div class="btn-container">
             <h1><span class="blue">Login</span></h1>
 
-            <form action="index.php" method="post">
+            <form action="" method="post">
                 <input type="text" style="padding:10px; border-radius:7px; width:300px;" name="username" placeholder="Username" required><br><br>
                 <input type="password" style="padding:10px; border-radius:7px; width:300px;" name="password" placeholder="Password" required><br><br>
                 <button style="background-color: #007bff; padding:10px; width:120px; border-radius:8px; color:#fff" type="submit">Login</button>
